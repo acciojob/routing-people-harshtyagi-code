@@ -1,28 +1,22 @@
-// UserDetails.js
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import { NavLink, Route } from "react-router-dom";
+import Users from "./Users";
 
-const UserDetails = () => {
-  const { id } = useParams();
-
-  // Fetch user information based on the ID from API or any data source
-  // For simplicity, let's assume we have a hardcoded user object
-  const user = {
-    id,
-    name: `User ${id}`,
-    email: `user${id}@example.com`,
-    // Add more user details as needed
-  };
+function UserDetails({ users }) {
+  // const user = users.find(u => u.id === parseInt(users.id, 10));
 
   return (
     <div>
-      <h1>User Details</h1>
-      <p>ID: {user.id}</p>
-      <p>Name: {user.name}</p>
-      <p>Email: {user.email}</p>
-      {/* Render more user details as needed */}
+      <h1>User List</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>
+            <NavLink to={`/users/${user.id}`}>{user.name}</NavLink>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 export default UserDetails;
